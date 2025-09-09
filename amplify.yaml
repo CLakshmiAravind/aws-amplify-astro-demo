@@ -3,11 +3,13 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm i -g pnpm
+        - curl -fsSL https://get.pnpm.io/install.sh | sh -
+        - export PATH="$HOME/.local/share/pnpm:$PATH"
         - pnpm config set store-dir .pnpm-store
-        - pnpm i
+        - pnpm install
     build:
       commands:
+        - export PATH="$HOME/.local/share/pnpm:$PATH"
         - pnpm run build
         - mv node_modules ./.amplify-hosting/compute/default
   artifacts:
